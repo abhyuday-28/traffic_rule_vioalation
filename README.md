@@ -283,14 +283,6 @@ Artificial-intelligence-enabled-traffic-management-system/
 - [ ] Add night-time detection capabilities
 - [ ] Implement vehicle type classification
 
-## 👥 Contributors
-
-**Sathvik Modhi** - [@modhisathvik7733](https://github.com/modhisathvik7733)  
-**V. Guru Pavani**  
-**V. Surya Sagar**
-
-**Guided by:** Dr. T. S. Mastan Rao, Associate Professor  
-**Institution:** CMR Technical Campus, JNTU Hyderabad
 
 ## 📄 License
 
