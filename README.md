@@ -7,19 +7,6 @@ An intelligent real-time traffic violation detection system using deep learning 
 [![YOLOv3](https://img.shields.io/badge/YOLO-v3-red.svg)](https://pjreddie.com/darknet/yolo/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-## 📋 Table of Contents
-- [Overview](#overview)
-- [Features](#features)
-- [System Architecture](#system-architecture)
-- [Technologies Used](#technologies-used)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Results](#results)
-- [Project Structure](#project-structure)
-- [Future Enhancements](#future-enhancements)
-- [Contributors](#contributors)
-- [License](#license)
-
 ## 🎯 Overview
 
 This project addresses the growing challenge of traffic violations in urban areas through automated detection using artificial intelligence. The system achieves **88.3% accuracy** in identifying various traffic violations in real-time, eliminating the need for manual monitoring by traffic police.
