@@ -1,4 +1,4 @@
-# 🚦 AI-Enabled Traffic Management System
+# 🚦 AI-Enabled Traffic Management System Using YOLO and OCR
 
 An intelligent real-time traffic violation detection system using deep learning and computer vision to automatically identify traffic rule violations and alert authorities.
 
@@ -284,9 +284,6 @@ Artificial-intelligence-enabled-traffic-management-system/
 - [ ] Implement vehicle type classification
 
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
