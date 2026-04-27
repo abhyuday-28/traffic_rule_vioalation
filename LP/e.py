@@ -1,23 +1,42 @@
+from __future__ import annotations
+
+import base64
+import os
+from pathlib import Path
+
 import requests
 
-url = 'https://app.nanonets.com/api/v2/OCR/Model/b14cf25d-ca49-46e8-a1e8-a1911668036d/LabelUrls/'
 
-headers = {
-    'accept': 'application/x-www-form-urlencoded'
-}
+OPENALPR_SECRET_KEY = os.getenv("OPENALPR_SECRET_KEY", "")
 
-data = {'urls' : ['https://goo.gl/ICoiHc']}
 
-response = requests.request('POST', url, headers=headers, auth=requests.auth.HTTPBasicAuth('ca49N499hj4hLD55CgqFOaNDUkHKuGaE', ''), data=data)
+def recognize_plate(image_path: str | os.PathLike[str]) -> str | None:
+    image_path = Path(image_path)
+    if not image_path.exists():
+        raise FileNotFoundError(f"Image not found: {image_path}")
+    if not OPENALPR_SECRET_KEY:
+        raise RuntimeError("Set the OPENALPR_SECRET_KEY environment variable before calling this helper.")
 
-print(response.text)
+    with image_path.open("rb") as image_file:
+        encoded_image = base64.b64encode(image_file.read())
 
-SECRET_KEY = 'sk_fa7d3dcec0363bdfb6ac3e06'
-    with open(IMAGE_PATH, 'rb') as image_file:
-        img_base64 = base64.b64encode(image_file.read())
-    url = 'https://api.openalpr.com/v2/recognize_bytes?recognize_vehicle=1&country=ind&secret_key=%s' % (SECRET_KEY)  #Replace 'ind' with  your country code
-    r = requests.post(url, data = img_base64)
+    url = (
+        "https://api.openalpr.com/v2/recognize_bytes"
+        f"?recognize_vehicle=1&country=ind&secret_key={OPENALPR_SECRET_KEY}"
+    )
+    response = requests.post(url, data=encoded_image, timeout=30)
+    response.raise_for_status()
+
+    results = response.json().get("results", [])
+    if not results:
+        return None
+    return results[0].get("plate")
+
+
+if __name__ == "__main__":
+    sample_image = Path(__file__).resolve().parent / "frame0.jpg"
     try:
-        return(r.json()['results'][0]['plate'])
-    except:
-        print("No number plate found")
+        plate = recognize_plate(sample_image)
+        print(plate or "No number plate found")
+    except Exception as exc:
+        print(exc)

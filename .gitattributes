@@ -1,2 +1,6 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+yolov3.weights filter=lfs diff=lfs merge=lfs -text
+yolov3-obj_2400.weights filter=lfs diff=lfs merge=lfs -text
+_detector_source/object_detection_yolox_2022nov.onnx filter=lfs diff=lfs merge=lfs -text
+_ocr_source_fresh/*.h5 filter=lfs diff=lfs merge=lfs -text

@@ -1,299 +1,301 @@
-# 🚦 AI-Enabled Traffic Management System Using YOLO and OCR
+# AI-Enabled Traffic Violation Detection System
 
-An intelligent real-time traffic violation detection system using deep learning and computer vision to automatically identify traffic rule violations and alert authorities.
+This project is a desktop-based traffic rule violation detection system built with Python, OpenCV, Tkinter, and OCR models. It accepts image, video, or live camera input, detects violations, extracts vehicle plate details when possible, stores evidence, and supports reporting through email and Telegram.
 
-[![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)](https://www.python.org/)
-[![OpenCV](https://img.shields.io/badge/OpenCV-4.5+-green.svg)](https://opencv.org/)
-[![YOLOv3](https://img.shields.io/badge/YOLO-v3-red.svg)](https://pjreddie.com/darknet/yolo/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+## Current Features
 
-## 🎯 Overview
+- Image, video, and live camera input
+- Triple riding detection
+- No-helmet detection
+- Red-light jumping detection
+- Number plate extraction and OCR
+- Evidence image saving
+- Excel export of logged violations
+- Email reporting
+- Telegram reporting with photo attachment
 
-This project addresses the growing challenge of traffic violations in urban areas through automated detection using artificial intelligence. The system achieves **88.3% accuracy** in identifying various traffic violations in real-time, eliminating the need for manual monitoring by traffic police.
+## Project Structure
 
-### Problem Statement
-- Manual traffic violation detection is slow and inefficient
-- Traffic police cannot capture multiple violations simultaneously
-- Human intervention leads to delays and reduced accuracy
+Main application files:
 
-### Solution
-An end-to-end automated system that:
-- Detects violations in real-time using computer vision
-- Identifies vehicle license plates using OCR
-- Automatically alerts authorities via SMS with violation details
+- `main.py`
+- `traffic_system/gui.py`
+- `traffic_system/pipeline.py`
+- `traffic_system/models.py`
+- `traffic_system/plate.py`
+- `traffic_system/emailer.py`
+- `traffic_system/settings.py`
 
-## ✨ Features
+Important model and asset paths:
 
-### 🪖 Helmet Detection
-- Real-time detection of riders with and without helmets on two-wheelers
-- Uses YOLOv3 with custom-trained weights for helmet classification
-- Automatically captures violator images for evidence
+- `_detector_source/object_detection_yolox_2022nov.onnx`
+- `yolov3-obj.cfg`
+- `yolov3-obj_2400.weights`
+- `obj.names`
+- `_ocr_source_fresh/wpod-net.json`
+- `_ocr_source_fresh/wpod-net.h5`
+- `_ocr_source_fresh/MobileNets_character_recognition.json`
+- `_ocr_source_fresh/License_character_recognition_weight.h5`
+- `_ocr_source_fresh/license_character_classes.npy`
+- `_ocr_source_fresh/local_utils.py`
 
-### 👥 Triple Riding Detection
-- Identifies multiple riders (>2) on two-wheelers using person detection
-- Employs Deconvolutional Neural Network-based YOLO algorithm
-- Classifies vehicles as rule-breach or compliant
+Sample input folders:
 
-### 🚗 License Plate Recognition
-- Automatic number plate detection and extraction using YOLO
-- Optical Character Recognition (OCR) using TensorFlow Lite
-- Perspective transformation for accurate text extraction
+- `samples/images`
+- `samples/videos`
 
-### 📱 SMS Alert System
-- Integration with Twilio API for instant SMS notifications
-- Sends violation details with vehicle registration number to authorities
-- Automated challan generation and notification to vehicle owners
+Runtime output:
 
-### 🖥️ User-Friendly GUI
-- Tkinter-based graphical interface for traffic authorities
-- Single dashboard to monitor multiple violation types
-- Real-time video processing and violation logging
+- `app_output`
 
-## 🏗️ System Architecture
+## Python Version
 
-```
-┌─────────────────┐
-│   Video Input   │
-│  (Live/File)    │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  Frame Extract  │
-│    (OpenCV)     │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  YOLO Detection │
-│   (YOLOv3 CNN)  │
-└────────┬────────┘
-         │
-         ├──────────────┬────────────────┐
-         ▼              ▼                ▼
-   ┌──────────┐  ┌──────────┐    ┌──────────┐
-   │ Helmet   │  │  Triple  │    │  Plate   │
-   │Detection │  │  Riding  │    │Detection │
-   └─────┬────┘  └─────┬────┘    └─────┬────┘
-         │             │               │
-         └─────────────┴───────────────┘
-                       │
-                       ▼
-              ┌─────────────────┐
-              │  OCR Processing │
-              │ (TensorFlow Lite)│
-              └────────┬─────────┘
-                       │
-                       ▼
-              ┌─────────────────┐
-              │  SMS Alert      │
-              │  (Twilio API)   │
-              └─────────────────┘
+Use Python `3.10`.
+
+This project was built and tested with Python 3.10 and a local virtual environment.
+
+## Setup
+
+1. Clone or copy the project.
+2. Install Python `3.10`.
+3. Open PowerShell in the project root.
+4. Create a virtual environment:
+
+```powershell
+python -m venv venv
 ```
 
-## 🛠️ Technologies Used
+5. Activate it:
 
-### Core Technologies
-- **Python 3.7+** - Primary programming language
-- **OpenCV** - Image processing and video frame extraction
-- **YOLOv3** - Object detection (vehicles, helmets, persons)
-- **TensorFlow Lite** - OCR for license plate text recognition
-- **NumPy** - Numerical computations and array operations
-
-### Frameworks & Libraries
-- **Tkinter** - GUI development for traffic management interface
-- **Twilio API** - SMS notification system
-- **Pandas** - Data logging and management
-- **Darknet** - Deep learning framework for YOLO
-
-### Machine Learning Models
-- **YOLOv3** - Convolutional Neural Network for object detection
-- **Random Forest** - Classification for violation categorization
-- **OCR Model** - Custom-trained text recognition model
-
-### Infrastructure
-- **PyCharm** - Development IDE
-- **Windows 8/10** - Operating system
-
-## 📦 Installation
-
-### Prerequisites
-```bash
-# Check Python version
-python --version  # Should be 3.7 or higher
+```powershell
+.\venv\Scripts\Activate.ps1
 ```
 
-### Step 1: Clone the Repository
-```bash
-git clone https://github.com/modhisathvik7733/Artificial-intelligence-enabled-traffic-management-system.git
-cd Artificial-intelligence-enabled-traffic-management-system
+6. Install dependencies:
+
+```powershell
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -m pip install pyinstaller python-pptx protobuf==3.20.3
 ```
 
-### Step 2: Install Dependencies
-```bash
-pip install -r requirements.txt
+## Running the App
+
+Run the GUI with:
+
+```powershell
+.\venv\Scripts\python.exe main.py
 ```
 
-**requirements.txt:**
-```
-opencv-python==4.5.5.64
-numpy==1.21.6
-tensorflow==2.8.0
-twilio==7.16.0
-pandas==1.3.5
-Pillow==9.0.1
+If you want to use the helper batch files on another PC:
+
+1. Double-click `setup_other_pc.bat`
+2. Then double-click `run_app.bat`
+
+## How the App Works
+
+At a high level:
+
+1. The GUI loads an image, video, or camera stream.
+2. A YOLOX detector identifies traffic participants such as person, motorbike, car, truck, and traffic light.
+3. A custom helmet detector checks helmet presence.
+4. A rule engine determines violations such as:
+   - triple riding
+   - no helmet
+   - red-light jumping
+5. The vehicle crop is passed to the OCR pipeline for plate extraction and text recognition.
+6. Evidence is saved in `app_output`.
+7. Violations can be exported or reported.
+
+## Telegram Reporting
+
+The application supports sending the selected violation directly to Telegram using a bot.
+
+### What it sends
+
+When you choose a violation in the GUI and trigger Telegram reporting, the app sends:
+
+- violation type
+- timestamp
+- detected plate text
+- notes
+- evidence image
+
+### Where the Telegram code lives
+
+Telegram configuration is defined in:
+
+- `traffic_system/settings.py`
+
+Telegram API sending logic is implemented in:
+
+- `traffic_system/emailer.py`
+
+The GUI button wiring is in:
+
+- `traffic_system/gui.py`
+
+### How Telegram technically works
+
+The app does not use polling or webhooks. It simply makes an outbound HTTP request to the Telegram Bot API when the user clicks the Telegram report button.
+
+If an evidence image exists, it uses the `sendPhoto` endpoint.
+If no image exists, it falls back to `sendMessage`.
+
+### How to connect your own Telegram bot
+
+1. Open Telegram
+2. Search for `@BotFather`
+3. Start the chat
+4. Send:
+
+```text
+/newbot
 ```
 
-### Step 3: Download YOLO Weights
-```bash
-# Download YOLOv3 weights for general object detection
-wget https://pjreddie.com/media/files/yolov3.weights
+5. Give the bot a name
+6. Give the bot a username ending with `bot`
+7. BotFather will return a bot token
 
-# Download custom-trained helmet detection weights
-# Place in project root directory
+Example token format:
+
+```text
+123456789:AAExampleTokenHere
 ```
 
-### Step 4: Configure Twilio API (Optional)
-1. Create a free account at [Twilio](https://www.twilio.com/)
-2. Get your Account SID and Auth Token
-3. Update credentials in the SMS notification module:
+### How to get your chat ID
+
+1. Open Telegram
+2. Search for your new bot
+3. Press `Start`
+4. Send any message to the bot
+5. Open this URL in a browser:
+
+```text
+https://api.telegram.org/bot<YOUR_BOT_TOKEN>/getUpdates
+```
+
+6. Look for:
+
+```json
+"chat": {
+  "id": 123456789,
+  "type": "private"
+}
+```
+
+That `id` value is your chat ID.
+
+### How to change Telegram settings in the project
+
+Open:
+
+- `traffic_system/settings.py`
+
+Edit:
+
 ```python
-# In your SMS module
-account_sid = "YOUR_ACCOUNT_SID"
-auth_token = "YOUR_AUTH_TOKEN"
-from_number = "YOUR_TWILIO_NUMBER"
-to_number = "AUTHORITY_PHONE_NUMBER"
+TELEGRAM_BOT_TOKEN = "your_bot_token_here"
+TELEGRAM_CHAT_ID = "your_chat_id_here"
 ```
 
-### Step 5: Configure OpenALPR API (for OCR)
-```python
-SECRET_KEY = "YOUR_OPENALPR_SECRET_KEY"
+Then save the file and run the app again.
+
+### Group chat setup
+
+If you want to send messages to a Telegram group:
+
+1. Add the bot to the group
+2. Send a message in the group
+3. Call `getUpdates` again
+4. Use the group chat ID returned by Telegram
+
+Group IDs are usually negative numbers such as:
+
+```text
+-1001234567890
 ```
 
-## 🚀 Usage
+### Security note
 
-### Running the GUI Application
-```bash
-python main.py
+Do not commit a real personal bot token to a public repository. If a token is exposed, revoke it with BotFather and generate a new one.
+
+## Email Reporting
+
+The application can also send a selected violation by email through SMTP.
+
+This logic is implemented in:
+
+- `traffic_system/emailer.py`
+
+The GUI fields are in:
+
+- `traffic_system/gui.py`
+
+## Output Files
+
+Generated outputs are stored in:
+
+- `app_output`
+
+Typical output includes:
+
+- annotated evidence images
+- cropped plate images
+- exported Excel log
+
+## Notes on Accuracy
+
+This project is a working prototype, not a production-grade enforcement system.
+
+Important limitations:
+
+- helmet detection can still be inconsistent across viewpoints
+- triple-riding detection is difficult in crowded scenes
+- OCR depends heavily on image clarity and plate visibility
+- long videos can be slow on CPU-only systems
+
+## Troubleshooting
+
+### App does not start
+
+Make sure:
+
+- Python `3.10` is installed
+- the virtual environment was created successfully
+- all dependencies are installed
+
+### OCR says plate could not be read
+
+That usually means:
+
+- the crop was too small
+- the plate was blurred
+- the plate angle was poor
+- OCR confidence was too low
+
+### Telegram reporting fails
+
+Check:
+
+- bot token is correct
+- chat ID is correct
+- the bot has already received at least one message from that chat
+- internet connection is available
+
+## Suggested `.gitignore` Entries
+
+If you are preparing this repo for GitHub, exclude generated and machine-local folders such as:
+
+```gitignore
+venv/
+build/
+dist/
+app_output/
+__pycache__/
+*.pyc
 ```
 
-This launches the traffic management interface with options for:
-- Helmet Detection (Image/Video)
-- Triple Riding Detection (Image/Video)
-- License Plate Detection
-- Live Traffic Monitoring
+## License
 
-### Running Individual Modules
-
-**Helmet Detection on Video:**
-```bash
-python HelmetdetectionYOLOV3.py
-```
-
-**Triple Riding Detection:**
-```bash
-python yolodetectionwebcam1.py
-```
-
-**License Plate Recognition:**
-```bash
-python live1.py  # For live detection
-```
-
-**OCR Text Extraction:**
-```bash
-python ocr_detection.py
-```
-
-### Input Formats
-- **Video Files:** `.mp4`, `.avi`
-- **Image Files:** `.jpg`, `.png`
-- **Live Feed:** Webcam or IP camera stream
-
-### Output
-- Detected violations saved in `output/` folder
-- Violation logs stored in `data.csv`
-- SMS alerts sent automatically to configured numbers
-
-## 📊 Results
-
-### Performance Metrics
-| Metric | Value |
-|--------|-------|
-| Overall Accuracy | 88.3% |
-| Helmet Detection Accuracy | 85-90% |
-| Triple Riding Detection | 82-87% |
-| License Plate Recognition | 75-80% |
-| Real-time Processing | ✅ Yes |
-
-### Detection Speed
-- **Video Processing:** ~15-20 FPS on standard CPU
-- **Image Detection:** ~0.5-1 second per image
-- **OCR Processing:** ~2-3 seconds per plate
-
-### Advantages Over Existing Systems
-✅ Automated 24/7 monitoring  
-✅ Faster than manual detection  
-✅ Can detect multiple violations simultaneously  
-✅ Cost-effective compared to human resources  
-✅ Higher accuracy than traditional methods  
-
-## 📁 Project Structure
-
-```
-Artificial-intelligence-enabled-traffic-management-system/
-│
-├── cfg/
-│   ├── yolov3.cfg              # YOLOv3 configuration
-│   └── yolov3-obj.cfg          # Custom helmet detection config
-│
-├── weights/
-│   ├── yolov3.weights          # Pre-trained YOLO weights
-│   └── yolov3-obj2400.weights  # Custom helmet weights
-│
-├── data/
-│   ├── coco.names              # COCO dataset labels
-│   └── obj.names               # Custom object labels
-│
-├── output/
-│   ├── helmets/                # Helmet violation images
-│   ├── tripleride/             # Triple riding violations
-│   └── numberplates/           # Extracted license plates
-│
-├── HelmetdetectionYOLOV3.py    # Helmet detection module
-├── yolodetectionwebcam1.py     # Triple riding detection
-├── live1.py                    # License plate detection
-├── ocr_detection.py            # OCR text extraction
-├── main.py                     # GUI application entry point
-├── data.csv                    # Violation logs
-├── requirements.txt            # Python dependencies
-└── README.md                   # Project documentation
-```
-
-## 🔮 Future Enhancements
-
-- [ ] Add more violation types (wrong-way driving, signal violations)
-- [ ] Implement cloud-based processing for scalability
-- [ ] Integrate with traffic management databases
-- [ ] Add mobile application for authorities
-- [ ] Implement real-time dashboard with analytics
-- [ ] Support for multiple camera feeds simultaneously
-- [ ] Integration with automatic challan payment systems
-- [ ] Improve OCR accuracy with advanced deep learning models
-- [ ] Add night-time detection capabilities
-- [ ] Implement vehicle type classification
-
-
-
-## 🙏 Acknowledgments
-
-- YOLOv3 by Joseph Redmon and Ali Farhadi
-- OpenCV community for computer vision libraries
-- OpenALPR for OCR capabilities
-- Twilio for SMS API integration
-- CMR Technical Campus for project support
-
-
----
-
-⭐ If you find this project useful, please consider giving it a star!
+Use and distribute according to the license policy of your project or institution.

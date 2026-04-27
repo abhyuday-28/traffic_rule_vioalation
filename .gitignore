@@ -1,0 +1,31 @@
+venv/
+build/
+dist/
+app_output/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Local test and scratch outputs
+dev/
+dev1/
+test_out/
+test_out1/
+
+# Editor / temp files
+tempCodeRunnerFile.py
+launcher_error.log
+
+# Generated presentations / packaged binaries
+TrafficViolationSystem.exe
+TrafficViolationSystemPortable.exe
+TrafficViolationSystem.spec
+Traffic_Violation_System_Presentation.pptx
+
+# Archives and local exports
+project_334.zip
+*.xlsx
+
+# Optional local-only sample clutter
+*.log
