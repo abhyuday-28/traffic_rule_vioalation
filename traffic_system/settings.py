@@ -42,5 +42,5 @@ DEFAULT_SAMPLE_VIDEO = ROOT / "om1.mp4"
 SUPPORTED_IMAGE_TYPES = [("Image files", "*.jpg *.jpeg *.png *.bmp *.webp")]
 SUPPORTED_VIDEO_TYPES = [("Video files", "*.mp4 *.avi *.mov *.mkv")]
 
-TELEGRAM_BOT_TOKEN = "8674162289:AAEOTJV_H9zIwsOZshtStqu81aNZJBm5UdU"
-TELEGRAM_CHAT_ID = "1190938551"
+TELEGRAM_BOT_TOKEN = ""
+TELEGRAM_CHAT_ID = ""

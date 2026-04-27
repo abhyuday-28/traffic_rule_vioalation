@@ -57,21 +57,31 @@ This project was built and tested with Python 3.10 and a local virtual environme
 ## Setup
 
 1. Clone or copy the project.
-2. Install Python `3.10`.
-3. Open PowerShell in the project root.
-4. Create a virtual environment:
+2. Install Git LFS if it is not already installed.
+3. After cloning, run:
+
+```powershell
+git lfs install
+git lfs pull
+```
+
+These two commands are required for this repository because the detector and OCR model files are stored using Git LFS.
+
+4. Install Python `3.10`.
+5. Open PowerShell in the project root.
+6. Create a virtual environment:
 
 ```powershell
 python -m venv venv
 ```
 
-5. Activate it:
+7. Activate it:
 
 ```powershell
 .\venv\Scripts\Activate.ps1
 ```
 
-6. Install dependencies:
+8. Install dependencies:
 
 ```powershell
 python -m pip install --upgrade pip
@@ -200,6 +210,8 @@ TELEGRAM_CHAT_ID = "your_chat_id_here"
 ```
 
 Then save the file and run the app again.
+
+By default, the repository does not contain a real Telegram bot token or chat ID. You must add your own values before Telegram reporting will work.
 
 ### Group chat setup
 
